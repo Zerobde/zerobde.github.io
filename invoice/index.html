@@ -118,7 +118,13 @@
                 <th class="number">Quantity</th>
                 <th class="money">Total</th>
               </tr>
-              <tr v-for="item in invoice.Items.concat(invoice.Items2, invoice.Items3)">
+              <tr
+  v-for="item in (invoice.Items || []).concat(
+    invoice.Items2 || [],
+    invoice.Items3 || []
+  )"
+  :key="item.id || item.Description"
+>
                 <td>{{ item.Description }}</td>
                 <td class="money">{{ item.Price | currency }}</td>
                 <td class="number">{{ item.Quantity }}</td>
